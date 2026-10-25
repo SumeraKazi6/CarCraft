@@ -244,4 +244,83 @@ describe('Vehicle Inventory API', () => {
         expect(response.body).toEqual({ message: 'Unable to load vehicles.' });
         expect(pool.execute).toHaveBeenCalledTimes(1);
     });
+
+    test('GET /api/vehicles?all=true should return all vehicles without deduplication', async () => {
+        const sampleVehicles = [
+            { id: 11, make: 'Toyota', model: 'Camry', category: 'Sedan', color: 'Silver' },
+            { id: 12, make: 'Toyota', model: 'Camry', category: 'Sedan', color: 'Silver' }
+        ];
+
+        pool.execute.mockResolvedValue([sampleVehicles]);
+
+        const response = await request(app).get('/api/vehicles').query({ all: 'true' });
+
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveLength(2);
+        expect(response.body[0].id).toBe(11);
+        expect(response.body[1].id).toBe(12);
+    });
+
+    test('DELETE /api/vehicles/:id should delete vehicle when it exists and has no bookings', async () => {
+        pool.execute
+            .mockResolvedValueOnce([[{ id: 5 }]]) // SELECT id (vehicle exists)
+            .mockResolvedValueOnce([[{ count: 0 }]]) // SELECT COUNT(*) FROM bookings (no bookings)
+            .mockResolvedValueOnce([{ affectedRows: 1 }]); // DELETE FROM vehicles
+
+        const response = await request(app).delete('/api/vehicles/5');
+
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({
+            success: true,
+            message: 'Vehicle deleted successfully.',
+            deletedVehicleId: 5
+        });
+        expect(pool.execute).toHaveBeenCalledWith(
+            expect.stringContaining('DELETE FROM vehicles WHERE id = ?'),
+            [5]
+        );
+    });
+
+    test('DELETE /api/vehicles/:id should return 400 for an invalid ID', async () => {
+        const response = await request(app).delete('/api/vehicles/invalid-id');
+
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty('message', 'Invalid vehicle ID.');
+    });
+
+    test('DELETE /api/vehicles/:id should return 404 when vehicle is not found', async () => {
+        pool.execute.mockResolvedValueOnce([[]]); // SELECT id returns empty
+
+        const response = await request(app).delete('/api/vehicles/999');
+
+        expect(response.status).toBe(404);
+        expect(response.body).toHaveProperty('message', 'Vehicle not found in the database.');
+    });
+
+    test('DELETE /api/vehicles/:id should return 409 when vehicle is referenced by bookings', async () => {
+        pool.execute
+            .mockResolvedValueOnce([[{ id: 4 }]]) // SELECT id (vehicle exists)
+            .mockResolvedValueOnce([[{ count: 2 }]]); // SELECT COUNT(*) (2 bookings exist)
+
+        const response = await request(app).delete('/api/vehicles/4');
+
+        expect(response.status).toBe(409);
+        expect(response.body.message).toContain('This vehicle is referenced by existing bookings or purchases');
+    });
+
+    test('DELETE /api/vehicles/:id should handle foreign key constraint errors with 409', async () => {
+        const fkError = new Error('Foreign key violation');
+        fkError.code = 'ER_ROW_IS_REFERENCED_2';
+        fkError.errno = 1451;
+
+        pool.execute
+            .mockResolvedValueOnce([[{ id: 7 }]])
+            .mockResolvedValueOnce([[{ count: 0 }]])
+            .mockRejectedValueOnce(fkError);
+
+        const response = await request(app).delete('/api/vehicles/7');
+
+        expect(response.status).toBe(409);
+        expect(response.body.message).toContain('This vehicle is referenced by existing bookings or purchases');
+    });
 });
