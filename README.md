@@ -130,23 +130,19 @@ The project includes a kata-aligned vehicle inventory test suite in `server/test
 
 ## My AI Usage
 
-I used GitHub Copilot as the primary AI assistant throughout the build process.
+GitHub Copilot: Coding assistance and implementation support.
 
-How it was used:
+ChatGPT: Authentication review, debugging guidance, and development support.
 
-- generating and refining the Node/Express route structure
-- drafting the inventory and auth test cases in TDD flow
-- helping patch backend route contracts and validation logic
-- assisting in premium frontend redesign while keeping the app functional
+Claude: Coding assistance and problem-solving support.
+
+Google Gemini: Development assistance and idea refinement.
+
+Google Flow: Generation and refinement of visual assets and car animation.
 
 Reflection:
 
-AI dramatically accelerated the conversion from a partially broken prototype into a production-style dealership app. It was especially useful for rapid iteration on API contracts, validation logic, and UI structure. The important safeguard was verifying every AI-generated change against the running app and tests so the final result matched the actual requirement set rather than a generic template.
+AI dramatically accelerated the conversion from a partially broken prototype into a production-style dealership app. It was especially useful for rapid iteration on API contracts, and UI structure. The important safeguard was verifying every AI-generated change against the running app and tests so the final result matched the actual requirement set rather than a generic template.
 
-## Notes
 
-This repository is designed to be run locally. A public GitHub repository link and external raw AI chat logs are not available in this workspace environment, so they cannot be published from here without creating a separate external repo and transcript export outside the restriction of this session.
 
-## Screenshots
-
-Place screenshots here after running the app locally and capturing the final interface.
