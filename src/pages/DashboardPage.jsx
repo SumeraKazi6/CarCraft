@@ -562,10 +562,12 @@ export default function DashboardPage() {
     } catch (error) {
       console.error('Vehicle deletion failed:', error)
 
-      setFormMessage(
+      const errorMsg =
         error.message ||
-          'Unable to delete the vehicle. Check the server/API and try again.',
-      )
+        'Unable to delete the vehicle. Check the server/API and try again.'
+
+      setFormMessage(errorMsg)
+      alert(errorMsg)
     } finally {
       setDeletingVehicleId(null)
     }
@@ -725,6 +727,19 @@ export default function DashboardPage() {
                         </h2>
                       </div>
                     </div>
+
+                    {formMessage && (
+                      <div
+                        role="status"
+                        className={`mb-4 rounded-xl border p-4 text-sm font-medium ${
+                          formMessage.toLowerCase().includes('successfully')
+                            ? 'border-emerald-500/40 bg-emerald-500/15 text-emerald-200'
+                            : 'border-red-500/40 bg-red-500/15 text-red-200'
+                        }`}
+                      >
+                        {formMessage}
+                      </div>
+                    )}
 
                     <div className="mt-6 overflow-hidden rounded-2xl border border-slate-800 bg-[#0b1220]">
                       <div className="overflow-x-auto">
