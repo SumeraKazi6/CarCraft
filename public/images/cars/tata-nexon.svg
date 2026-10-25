@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg4" x1="0" x2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="50%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#431407"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg4)"/>
+  <circle cx="160" cy="130" r="100" fill="#fdba74" opacity="0.25"/>
+  <rect x="120" y="520" width="960" height="100" fill="#0f172a" opacity="0.36"/>
+  <path d="M170 476 L246 350 L540 320 L780 352 L930 476 L1000 476 L1000 560 L170 560 Z" fill="#fed7aa" opacity="0.9"/>
+  <path d="M260 450 L350 345 L552 324 L685 347 L842 450 Z" fill="#fff7ed" opacity="0.9"/>
+  <rect x="355" y="390" width="278" height="68" rx="18" fill="#7c2d12" opacity="0.8"/>
+  <rect x="650" y="390" width="170" height="68" rx="18" fill="#7c2d12" opacity="0.8"/>
+  <circle cx="360" cy="560" r="74" fill="#020617"/>
+  <circle cx="360" cy="560" r="30" fill="#ffedd5"/>
+  <circle cx="840" cy="560" r="74" fill="#020617"/>
+  <circle cx="840" cy="560" r="30" fill="#ffedd5"/>
+  <text x="600" y="230" font-family="Segoe UI, sans-serif" font-size="54" text-anchor="middle" fill="#fff7ed" letter-spacing="8">TATA NEXON</text>
+</svg>

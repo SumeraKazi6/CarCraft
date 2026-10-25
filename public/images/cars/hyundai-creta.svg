@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg3" x1="0" x2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="52%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg3)"/>
+  <circle cx="920" cy="120" r="140" fill="#c4b5fd" opacity="0.18"/>
+  <rect x="120" y="520" width="960" height="100" fill="#0f172a" opacity="0.36"/>
+  <path d="M160 485 L265 360 L555 320 L790 355 L930 485 L1000 485 L1000 560 L160 560 Z" fill="#e9d5ff" opacity="0.9"/>
+  <path d="M270 450 L385 340 L510 325 L690 345 L845 450 Z" fill="#f5f3ff" opacity="0.9"/>
+  <rect x="360" y="392" width="292" height="68" rx="18" fill="#312e81" opacity="0.8"/>
+  <rect x="670" y="392" width="150" height="68" rx="18" fill="#312e81" opacity="0.8"/>
+  <circle cx="360" cy="560" r="75" fill="#020617"/>
+  <circle cx="360" cy="560" r="30" fill="#f5f3ff"/>
+  <circle cx="840" cy="560" r="75" fill="#020617"/>
+  <circle cx="840" cy="560" r="30" fill="#f5f3ff"/>
+  <text x="600" y="230" font-family="Segoe UI, sans-serif" font-size="54" text-anchor="middle" fill="#f5f3ff" letter-spacing="8">HYUNDAI CRETA</text>
+</svg>

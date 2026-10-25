@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg1" x1="0" x2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg1)"/>
+  <circle cx="180" cy="140" r="90" fill="#93c5fd" opacity="0.2"/>
+  <circle cx="960" cy="120" r="120" fill="#a5b4fc" opacity="0.14"/>
+  <rect x="120" y="520" width="960" height="100" fill="#0f172a" opacity="0.36"/>
+  <path d="M180 470 L270 330 L540 300 L730 330 L920 470 L1000 470 L1000 560 L180 560 Z" fill="#cbd5e1" opacity="0.9"/>
+  <path d="M260 450 L345 330 L525 310 L700 330 L840 450 Z" fill="#e2e8f0" opacity="0.9"/>
+  <rect x="340" y="385" width="255" height="70" rx="18" fill="#1e293b" opacity="0.85"/>
+  <rect x="610" y="385" width="190" height="70" rx="18" fill="#1e293b" opacity="0.85"/>
+  <circle cx="360" cy="560" r="76" fill="#020617"/>
+  <circle cx="360" cy="560" r="35" fill="#cbd5e1"/>
+  <circle cx="840" cy="560" r="76" fill="#020617"/>
+  <circle cx="840" cy="560" r="35" fill="#cbd5e1"/>
+  <text x="600" y="230" font-family="Segoe UI, sans-serif" font-size="54" text-anchor="middle" fill="#f8fafc" letter-spacing="8">TOYOTA CAMRY</text>
+</svg>

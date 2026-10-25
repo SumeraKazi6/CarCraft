@@ -1,0 +1,374 @@
+﻿
+import { useState } from 'react'
+import {
+  UserRound,
+  Mail,
+  LockKeyhole,
+  Eye,
+  EyeOff,
+  CheckCircle2,
+  AlertCircle,
+  ArrowRight,
+  ShieldCheck,
+  CarFront,
+} from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginCustomer } from '../api.js'
+
+function FeedbackBanner({ type, children }) {
+  const success = type === 'success'
+
+  return (
+    <div
+      role={success ? 'status' : 'alert'}
+      className={`mb-5 flex items-start gap-3 rounded-xl border p-3.5 text-sm ${
+        success
+          ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+          : 'border-red-500/30 bg-red-500/10 text-red-300'
+      }`}
+    >
+      {success ? (
+        <CheckCircle2 size={19} className="mt-0.5 shrink-0" />
+      ) : (
+        <AlertCircle size={19} className="mt-0.5 shrink-0" />
+      )}
+
+      <div>{children}</div>
+    </div>
+  )
+}
+
+function FormField({ id, label, icon: Icon, children }) {
+  return (
+    <div>
+      <label
+        htmlFor={id}
+        className="mb-2 block text-sm font-medium text-slate-200"
+      >
+        {label}
+      </label>
+
+      <div className="relative flex items-center rounded-xl border border-slate-700 bg-slate-950/60 transition-colors focus-within:border-blue-500">
+        <Icon
+          size={19}
+          aria-hidden="true"
+          className="ml-4 shrink-0 text-slate-500"
+        />
+
+        {children}
+      </div>
+    </div>
+  )
+}
+
+export default function LoginPage() {
+  const navigate = useNavigate()
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [feedback, setFeedback] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const inputClass =
+    'min-w-0 w-full bg-transparent px-3 py-3.5 text-sm text-white outline-none placeholder:text-slate-500'
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    setFeedback(null)
+
+    if (!email.trim() || !password) {
+      setFeedback({
+        type: 'error',
+        message: 'Please enter your email address and password.',
+      })
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      // Authenticate using the backend and registered customer credentials.
+      await loginCustomer({
+        email: email.trim(),
+        password,
+      })
+
+      setFeedback({
+        type: 'success',
+        message: 'Login successful! Welcome back to CarCraft.',
+      })
+
+      // Navigate after the backend confirms successful authentication.
+      navigate('/dashboard', { replace: true })
+    } catch (error) {
+      setFeedback({
+        type: 'error',
+        message: error.message || 'Invalid email or password.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <main className="min-h-screen overflow-hidden bg-[#0F172A] text-white">
+      {/* Navigation */}
+      <nav className="relative z-50 flex min-h-20 items-center justify-between border-b border-slate-800 bg-[#0F172A]/95 px-5 py-4 backdrop-blur-xl sm:px-8 lg:px-12">
+        <Link
+          to="/"
+          aria-label="CarCraft home"
+          className="flex shrink-0 items-center gap-3"
+        >
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-400/30 bg-blue-600/15 text-blue-300">
+            <CarFront size={27} />
+          </span>
+
+          <span className="text-lg font-bold tracking-[0.16em] sm:text-2xl sm:tracking-[0.2em]">
+            CARCRAFT
+          </span>
+        </Link>
+
+        <div className="flex items-center gap-3 text-xs font-medium sm:gap-7 sm:text-sm">
+          <Link
+            to="/"
+            className="text-slate-300 transition hover:text-blue-400"
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/#inventory"
+            className="hidden text-slate-300 transition hover:text-blue-400 sm:inline-block"
+          >
+            Inventory
+          </Link>
+
+          <span className="rounded-lg border border-blue-500/30 bg-blue-500/10 px-3 py-2 text-blue-300 sm:px-4">
+            Log in
+          </span>
+
+          <Link
+            to="/register"
+            className="text-slate-300 transition hover:text-blue-400"
+          >
+            Register
+          </Link>
+        </div>
+      </nav>
+
+      {/* Main content */}
+      <div className="relative mx-auto grid min-h-[calc(100vh-80px)] max-w-[1800px] grid-cols-1 lg:grid-cols-[56fr_44fr]">
+        {/* Background glow */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-40 top-1/4 h-96 w-96 rounded-full bg-blue-700/10 blur-3xl"
+        />
+
+        {/* Left: Car showcase */}
+        <section
+          aria-label="CarCraft automotive showcase"
+          className="relative flex min-h-[350px] items-center justify-center overflow-hidden px-4 py-8 sm:min-h-[450px] sm:px-8 lg:min-h-[calc(100vh-80px)] lg:px-6 xl:px-10"
+        >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-[42%] h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/25 blur-3xl sm:h-[450px] sm:w-[450px]"
+          />
+
+          <div className="relative z-10 w-full max-w-5xl">
+            <div className="relative">
+              <div
+                aria-hidden="true"
+                className="absolute inset-8 rounded-full bg-blue-600/20 blur-3xl"
+              />
+
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="CarCraft car showcase"
+                className="relative z-10 mx-auto aspect-[4/3] w-full scale-105 object-contain drop-shadow-[0_25px_70px_rgba(29,78,216,0.35)] sm:scale-110"
+              >
+                <source src="/register.mp4" type="video/mp4" />
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+
+            <div className="relative z-10 mx-auto mt-4 max-w-2xl text-center sm:mt-8">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-500/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-300 sm:text-xs sm:tracking-[0.22em]">
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                Welcome Back
+              </div>
+
+              <h1 className="text-3xl font-light leading-tight tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl">
+                Your journey.
+                <span className="mt-1 block font-semibold text-slate-300">
+                  Your CarCraft.
+                </span>
+              </h1>
+
+              <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">
+                Your next drive is waiting. Log in to continue exploring the
+                CarCraft showroom.
+              </p>
+
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-slate-400 sm:mt-8 sm:gap-6">
+                <span className="inline-flex items-center gap-2">
+                  <ShieldCheck size={17} className="text-blue-400" />
+                  Secure Customer Login
+                </span>
+
+                <span className="hidden h-4 w-px bg-slate-700 sm:inline-block" />
+
+                <span className="inline-flex items-center gap-2">
+                  <CarFront size={17} className="text-blue-400" />
+                  Discover Your Next Car
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Right: Login form */}
+        <section className="relative flex items-center justify-center border-t border-slate-800/70 px-4 py-10 sm:px-8 lg:min-h-[calc(100vh-80px)] lg:border-l lg:border-t-0 lg:px-8 lg:py-8 xl:px-12">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute right-0 top-1/4 h-80 w-80 rounded-full bg-blue-700/10 blur-3xl"
+          />
+
+          <div className="relative z-10 w-full max-w-lg rounded-2xl border border-slate-800 bg-slate-900/80 p-5 shadow-2xl shadow-black/20 backdrop-blur-xl sm:p-7 xl:p-9">
+            {/* Heading */}
+            <div className="mb-7">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-blue-500/20 bg-blue-600/15 text-blue-300">
+                <UserRound size={25} />
+              </div>
+
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
+                Customer Login
+              </p>
+
+              <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                Welcome Back
+              </h2>
+
+              <p className="mt-3 text-sm leading-6 text-slate-400">
+                Log in using the email address and password you registered
+                with.
+              </p>
+            </div>
+
+            {/* Login feedback */}
+            {feedback && (
+              <FeedbackBanner type={feedback.type}>
+                {feedback.message}
+              </FeedbackBanner>
+            )}
+
+            {/* Login form */}
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Email */}
+              <FormField id="email" label="Email Address" icon={Mail}>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value)
+                    setFeedback(null)
+                  }}
+                  className={inputClass}
+                  required
+                />
+              </FormField>
+
+              {/* Password */}
+              <FormField
+                id="password"
+                label="Password"
+                icon={LockKeyhole}
+              >
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value)
+                    setFeedback(null)
+                  }}
+                  className={inputClass}
+                  required
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((previous) => !previous)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  className="mr-3 rounded-md p-1 text-slate-400 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  {showPassword ? (
+                    <EyeOff size={18} />
+                  ) : (
+                    <Eye size={18} />
+                  )}
+                </button>
+              </FormField>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="group mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-blue-950/30 transition-all hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isSubmitting ? 'Verifying Account...' : 'Log In'}
+
+                {!isSubmitting && (
+                  <ArrowRight
+                    size={18}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
+                )}
+              </button>
+
+              {/* Registration link */}
+              <p className="text-center text-sm text-slate-400">
+                Don't have an account?{' '}
+                <Link
+                  to="/register"
+                  className="font-semibold text-blue-400 transition-colors hover:text-blue-300"
+                >
+                  Create an account
+                </Link>
+              </p>
+
+              <p className="text-center text-xs leading-5 text-slate-500">
+                Only registered customers with valid credentials can log in.
+              </p>
+            </form>
+
+            {/* Footer */}
+            <div className="mt-7 border-t border-slate-800 pt-5 text-center">
+              <p className="text-[11px] leading-5 text-slate-500">
+                CarCraft · Discover your next drive.
+              </p>
+
+              <Link
+                to="/"
+                className="mt-3 inline-block text-xs text-slate-400 transition-colors hover:text-white"
+              >
+                ← Back to homepage
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  )
+}

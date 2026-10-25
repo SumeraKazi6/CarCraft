@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg5" x1="0" x2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg5)"/>
+  <circle cx="980" cy="110" r="130" fill="#93c5fd" opacity="0.16"/>
+  <rect x="120" y="520" width="960" height="100" fill="#0f172a" opacity="0.36"/>
+  <path d="M170 480 L250 335 L565 315 L785 335 L930 480 L1000 480 L1000 560 L170 560 Z" fill="#dbeafe" opacity="0.9"/>
+  <path d="M270 450 L372 338 L540 324 L700 340 L845 450 Z" fill="#eff6ff" opacity="0.9"/>
+  <rect x="360" y="392" width="282" height="66" rx="16" fill="#1e3a8a" opacity="0.8"/>
+  <rect x="655" y="392" width="180" height="66" rx="16" fill="#1e3a8a" opacity="0.8"/>
+  <circle cx="360" cy="560" r="74" fill="#020617"/>
+  <circle cx="360" cy="560" r="30" fill="#e0f2fe"/>
+  <circle cx="840" cy="560" r="74" fill="#020617"/>
+  <circle cx="840" cy="560" r="30" fill="#e0f2fe"/>
+  <text x="600" y="230" font-family="Segoe UI, sans-serif" font-size="52" text-anchor="middle" fill="#f8fbff" letter-spacing="8">BMW 3 SERIES</text>
+</svg>

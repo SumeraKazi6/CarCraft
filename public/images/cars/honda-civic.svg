@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg2" x1="0" x2="1">
+      <stop offset="0%" stop-color="#06131c"/>
+      <stop offset="55%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#022c22"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg2)"/>
+  <rect x="120" y="520" width="960" height="100" fill="#0f172a" opacity="0.36"/>
+  <path d="M180 465 L250 340 L545 312 L760 336 L920 465 L1000 465 L1000 560 L180 560 Z" fill="#d1fae5" opacity="0.9"/>
+  <path d="M260 450 L348 343 L532 326 L686 348 L842 450 Z" fill="#ecfdf5" opacity="0.9"/>
+  <rect x="360" y="390" width="250" height="62" rx="18" fill="#083344" opacity="0.8"/>
+  <rect x="630" y="390" width="170" height="62" rx="18" fill="#083344" opacity="0.8"/>
+  <circle cx="360" cy="560" r="72" fill="#020617"/>
+  <circle cx="360" cy="560" r="28" fill="#d1fae5"/>
+  <circle cx="840" cy="560" r="72" fill="#020617"/>
+  <circle cx="840" cy="560" r="28" fill="#d1fae5"/>
+  <text x="600" y="230" font-family="Segoe UI, sans-serif" font-size="54" text-anchor="middle" fill="#f0fdf4" letter-spacing="8">HONDA CIVIC</text>
+</svg>

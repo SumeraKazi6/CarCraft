@@ -1,0 +1,47 @@
+﻿# Dependencies
+node_modules/
+server/node_modules/
+
+# Build output
+dist/
+build/
+coverage/
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+server/.env
+server/.env.*
+!server/.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/*
+!.vscode/extensions.json
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test output
+.nyc_output/
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local backups
+backup-before-jwt-20261025-131722/
